@@ -15,7 +15,17 @@ app.get('/', function(req, res) {
 app.get('/list', function(req, res) {
 
 	//--------------------------------------------------------------------------------------
-	res.send(mongo.myDateTime());
+	res.send(
+    "<p>" + mongo.myDateTime() + "</p>" + 
+    "<p>" + mongo.checkConnection() + "</p>" + 
+    "<p>" + mongo.findAllCollections() + "</p>" + 
+    "<p>" + mongo.findAll + "</p>" + ""  
+  
+  
+  
+  
+  
+  );
 	//--------------------------------------------------------------------------------------
 
 });
