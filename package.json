@@ -7,5 +7,16 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "giuseppefragala",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/giuseppefragala/mongodbutility.git"
+  },
+  "bugs": {
+    "url": "https://github.com/giuseppefragala/mongodbutility/issues"
+  },
+  "homepage": "https://github.com/giuseppefragala/mongodbutility#readme",
+  "dependencies": {
+    "mongodb": "^2.2.31"
+  }
 }
