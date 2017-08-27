@@ -1,10 +1,11 @@
 var express = require('express');
 var app = express();
 var path = require('path');
+var mongo = require('./modules/mongodbutility');
 
 
 
-app.set('views', __dirname + '/');
+app.set('views', __dirname + '/views');
 
 
 app.get('/', function(req, res) {
@@ -14,7 +15,7 @@ app.get('/', function(req, res) {
 app.get('/list', function(req, res) {
 
 	//--------------------------------------------------------------------------------------
-	res.send("Hallo");
+	res.send(mongo.myDateTime());
 	//--------------------------------------------------------------------------------------
 
 });

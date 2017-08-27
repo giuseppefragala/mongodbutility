@@ -1,3 +1,7 @@
+exports.myDateTime = function () {
+    return Date();
+};
+
 
 var MongoClient = require('mongodb').MongoClient, assert = require('assert');
 
