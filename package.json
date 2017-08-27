@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/giuseppefragala/mongodbutility#readme",
   "dependencies": {
-    "mongodb": "^2.2.31"
+    "express": "^4.15.4",
+    "mongodb": "^2.2.31",
+    "path": "^0.12.7"
   }
 }
