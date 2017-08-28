@@ -19,8 +19,14 @@ app.get('/list', function(req, res) {
     "<p>" + "Date: " +mongo.myDateTime() + "</p>" + 
     "<p>" + "Connection test: " +mongo.checkConnection() + "</p>" + 
     "<p>" + "findAllCollections: " + mongo.findAllCollections + "</p>" +
-    "<p>" + "findAllConnectionsName: " + mongo.findAllConnectionsName + "</p>" + ""  
-  
+    "<p>" + "findAllConnectionsName: " + mongo.findAllConnectionsName + "</p>" +  
+  	"<p>" + "insertDocuments: " + mongo.insertDocuments("firstDamnCollection", [
+  			{"_id":11,"prova":"valore_di_prova1"},
+  			{"_id":22,"prova":"valore_di_prova2"},
+  			{"_id":33,"prova":"valore_di_prova3"},
+  			{"_id":44,"prova":"valore_di_prova4"},
+  			{"_id":55,"prova":"valore_di_prova5"}
+  		] ) + "</p>" + ""
   
   
   

@@ -55,3 +55,21 @@ MongoClient.connect(url,function (err, db) {
   });
 });
 // --------- FIND ALL COLLECTION - RETURN AN OBJECT WITH THE NAME of the collections---------------------------------------------
+
+
+// --------- INSERT ONE DOCUMENT INTO A COLLECTION ------------------------------------------------------------------------------
+MongoClient.connect(url,function (err, db) {
+  if(err) return err;
+  exports.insertDocuments = function(collectionName, document) {
+    var the_result;
+    // Get the documents collection
+    var collection = db.collection("firstDamnCollection");
+    // Insert the documents
+      collection.insertMany(document, function (err, result) {
+      db.close() ;
+    })
+    return "Inserted the documents: " + JSON.stringify(document) + " into the collection: " + collectionName;
+  };  
+
+});
+// --------- INSERT ONE DOCUMENT INTO A COLLECTION ------------------------------------------------------------------------------
