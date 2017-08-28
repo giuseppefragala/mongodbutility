@@ -16,10 +16,10 @@ app.get('/list', function(req, res) {
 
 	//--------------------------------------------------------------------------------------
 	res.send(
-    "<p>" + mongo.myDateTime() + "</p>" + 
-    "<p>" + mongo.checkConnection() + "</p>" + 
-    "<p>" + mongo.findAllCollections() + "</p>" + 
-    "<p>" + mongo.findAll + "</p>" + ""  
+    "<p>" + "Date: " +mongo.myDateTime() + "</p>" + 
+    "<p>" + "Connection test: " +mongo.checkConnection() + "</p>" + 
+    "<p>" + "findAllCollections: " + mongo.findAllCollections + "</p>" +
+    "<p>" + "findAllConnectionsName: " + mongo.findAllConnectionsName + "</p>" + ""  
   
   
   
