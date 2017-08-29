@@ -3,27 +3,27 @@ exports.myDateTime = function () {
     return Date();
 };
 
-
 var MongoClient = require('mongodb').MongoClient, assert = require('assert');
 
 // Connection URL
-var url = process.env.MONGODB_URI;
+var url = "mongodb://sxkrpt:alrnz@ds159953.mlab.com:59953/fccdb";
+//process.env.MONGODB_URI;
+
 var server = url.split('@')[1].split('/')[0];
 var database = url.split('@')[1].split('/')[1];
-
 
 // ---------- CONNECTION TEST --------------------------------------------------------------------------------------------------
 // Use connect method to connect to the server
   MongoClient.connect(url, exports.checkConnection = function(err, db ) {
     assert.equal(null, err);
-    if(err) return err;
-    return "Connected successfully for method: CONNECTION TEST to server ";// + server + ", db: " + database;
+    if (err) return err;
     db.close();
+    return "Connected successfully for method: CONNECTION TEST to server ";// + server + ", db: " + database;
   });
 // ---------- CONNECTION TEST ---------------------------------------------------------------------------------------------------
 
 
-// --------- FIND ALL COLLECTION - RETURN ANOBJECT WITH KEY-VALUE PAIRS ('NAME':'NAMEVALUE')-------------------------------------
+// --------- FIND ALL COLLECTION - RETURN AN OBJECT WITH KEY-VALUE PAIRS ('NAME':'NAMEVALUE')-------------------------------------
 MongoClient.connect(url, function(err, db) {
   assert.equal(null, err);
   if(err) return err;
@@ -38,7 +38,7 @@ MongoClient.connect(url, function(err, db) {
   });
   db.close();
 });
-// --------- FIND ALL COLLECTION - RETURN ANOBJECT WITH KEY-VALUE PAIRS ('NAME':'NAMEVALUE')-------------------------------------
+// --------- FIND ALL COLLECTION - RETURN AN OBJECT WITH KEY-VALUE PAIRS ('NAME':'NAMEVALUE')-------------------------------------
 
 
 // --------- FIND ALL COLLECTION - RETURN AN OBJECT WITH THE NAME of the collections---------------------------------------------
@@ -51,25 +51,56 @@ MongoClient.connect(url,function (err, db) {
       collectionsName.push(collection.name);
     });
     exports.findAllConnectionsName = JSON.stringify(collectionsName);
-    db.close() ;
+    db.close();
   });
 });
 // --------- FIND ALL COLLECTION - RETURN AN OBJECT WITH THE NAME of the collections---------------------------------------------
 
 
-// --------- INSERT ONE DOCUMENT INTO A COLLECTION ------------------------------------------------------------------------------
+// --------- INSERT A SINGLE DOCUMENT OR AN ARRAY OF DOCUMENT INTO A COLLECTION -------------------------------------------------
 MongoClient.connect(url,function (err, db) {
   if(err) return err;
   exports.insertDocuments = function(collectionName, document) {
-    var the_result;
     // Get the documents collection
-    var collection = db.collection("firstDamnCollection");
+    var collection = db.collection(collectionName);
     // Insert the documents
-      collection.insertMany(document, function (err, result) {
-      db.close() ;
-    })
+    collection.insert(document, function (err, result) {
+        db.close();
+    });
     return "Inserted the documents: " + JSON.stringify(document) + " into the collection: " + collectionName;
   };  
 
 });
+// --------- INSERT A SINGLE DOCUMENT OR AN ARRAY OF DOCUMENT INTO A COLLECTION --------------------------------------------------
+
+// --------- REMOVE ALL DOCUMENTS INTO A COLLECTION ------------------------------------------------------------------------------
+MongoClient.connect(url,function (err, db) {
+  if(err) return err;
+  exports.removeAllDocuments = function(collectionName) {
+    // Fetch a collection to insert document into
+    var collection = db.collection(collectionName);
+    // Remove all the document
+    collection.removeMany();
+    db.close();
+    return "Removed all the documents into the collection: " + collectionName;
+  };
+});
 // --------- INSERT ONE DOCUMENT INTO A COLLECTION ------------------------------------------------------------------------------
+
+// --------- FIND ALL DOCUMENTS OF A COLLECTION ---------------------------------------------------------------------------------
+MongoClient.connect(url,function (err, db) {
+  if(err) return err;
+
+    // Get the documents collection
+    var collection = db.collection(collectionName);
+    var result;
+    // Perform a simple find and return all the documents
+    collection.find().toArray(function(err, docs) {
+      exports.findAllDocuments = function(collectionName, res) {      
+        return JSON.stringify(docs);
+      };
+      db.close();    
+    });
+});
+// --------- FIND ALL DOCUMENTS OF A COLLECTION ----------------------------------------------------------------------------------
+
