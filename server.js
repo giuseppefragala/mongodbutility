@@ -3,10 +3,7 @@ var app = express();
 var path = require('path');
 var mongo = require('./modules/mongodbutility');
 
-
-
 app.set('views', __dirname + '/views');
-
 
 app.get('/', function(req, res) {
       res.sendFile(path.join(__dirname + '/index.htm'));
@@ -14,10 +11,10 @@ app.get('/', function(req, res) {
 
 app.get('/list', function(req, res) {
 
-	//--------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------
 res.send(
-"<p>" + "Date: " +mongo.myDateTime() + "</p>" + 
-"<p>" + "Connection test: " +mongo.checkConnection() + "</p>" + 
+"<p>" + "Date: " + mongo.myDateTime() + "</p>" + 
+"<p>" + "Connection test: " + mongo.checkConnection() + "</p>" + 
 "<p>" + "findAllCollections: " + mongo.findAllCollections + "</p>" +
 "<p>" + "findAllConnectionsName: " + mongo.findAllConnectionsName + "</p>" +  
 "<p>" + "insertDocuments: " + mongo.insertDocuments("firstDamnCollection", [
@@ -35,7 +32,7 @@ res.send(
   
   
   );
-	//--------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------
 
 });
 

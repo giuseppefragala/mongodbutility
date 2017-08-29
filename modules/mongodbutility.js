@@ -6,19 +6,16 @@ exports.myDateTime = function () {
 var MongoClient = require('mongodb').MongoClient, assert = require('assert');
 
 // Connection URL
-var url = "mongodb://sxkrpt:alrnz@ds159953.mlab.com:59953/fccdb";
-//process.env.MONGODB_URI;
-
+var url = process.env.MONGODB_URI;
 var server = url.split('@')[1].split('/')[0];
 var database = url.split('@')[1].split('/')[1];
 
 // ---------- CONNECTION TEST --------------------------------------------------------------------------------------------------
-// Use connect method to connect to the server
-  MongoClient.connect(url, exports.checkConnection = function(err, db ) {
-    assert.equal(null, err);
+ //Use connect method to connect to the server
+  MongoClient.connect(url, exports.checkConnection = function(err, db) {
     if (err) return err;
+    return "Connected successfully for method: CONNECTION TEST, to server"  + server + ", db: " + database;
     db.close();
-    return "Connected successfully for method: CONNECTION TEST to server ";// + server + ", db: " + database;
   });
 // ---------- CONNECTION TEST ---------------------------------------------------------------------------------------------------
 
@@ -90,17 +87,17 @@ MongoClient.connect(url,function (err, db) {
 // --------- FIND ALL DOCUMENTS OF A COLLECTION ---------------------------------------------------------------------------------
 MongoClient.connect(url,function (err, db) {
   if(err) return err;
-
+  exports.findAllDocuments = function(collectionName, res) {
     // Get the documents collection
     var collection = db.collection(collectionName);
-    var result;
+    var res;
     // Perform a simple find and return all the documents
-    collection.find().toArray(function(err, docs) {
-      exports.findAllDocuments = function(collectionName, res) {      
-        return JSON.stringify(docs);
-      };
-      db.close();    
+    collection.find().toArray(function(err, docs) {      
+        res = JSON.stringify(docs);
+        db.close();
     });
+    return res;
+  };  
 });
 // --------- FIND ALL DOCUMENTS OF A COLLECTION ----------------------------------------------------------------------------------
 
